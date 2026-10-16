@@ -20,7 +20,6 @@ function applyTheme(theme) {
   const button = document.querySelector("#theme-toggle");
   if (button) {
     button.setAttribute("aria-pressed", String(theme === "dark"));
-    button.setAttribute("aria-label", theme === "dark" ? "Activar modo claro" : "Activar modo oscuro");
   }
 }
 
@@ -30,14 +29,15 @@ systemTheme.addEventListener("change", (event) => {
   if (!chosenTheme) applyTheme(event.matches ? "dark" : "light");
 });
 
-// 2. Esperamos al HTML para buscar los botones, el menú y las tarjetas.
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector("#year").textContent = new Date().getFullYear();
+// 2. Cada bloque comprueba sus elementos para poder funcionar por separado.
+function initializeThemeButton() {
   const themeButton = document.querySelector("#theme-toggle");
+  if (!themeButton) return;
   themeButton.hidden = false;
   applyTheme(document.documentElement.dataset.theme);
   themeButton.addEventListener("click", () => {
-    chosenTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    chosenTheme =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
     applyTheme(chosenTheme);
     try {
       localStorage.setItem(themeKey, chosenTheme);
@@ -45,20 +45,75 @@ document.addEventListener("DOMContentLoaded", () => {
       // El cambio sigue activo aunque no se pueda recordar tras cerrar la página.
     }
   });
+}
 
+function initializeNavigation() {
   const navigation = document.querySelector("#navigation");
+  const menuButton = document.querySelector(
+    '.menu-toggle[aria-controls="navigation"]',
+  );
+  const closeButton = navigation?.querySelector(".btn-close");
+  if (!navigation || !menuButton || !closeButton) return;
+
+  let destinationAfterClose = null;
+
+  // El atributo open del dialog es la fuente del estado real, también con Escape.
+  function syncExpandedState() {
+    menuButton.setAttribute("aria-expanded", String(navigation.open));
+  }
+  const menuStateObserver = new MutationObserver(syncExpandedState);
+  menuStateObserver.observe(navigation, {
+    attributes: true,
+    attributeFilter: ["open"],
+  });
+  syncExpandedState();
+
   navigation.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      if (navigation.open) navigation.querySelector(".btn-close").click();
+    link.addEventListener("click", (event) => {
+      if (
+        !navigation.open ||
+        event.defaultPrevented ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
+      const destination = document.getElementById(link.hash.slice(1));
+      if (!destination) return;
+
+      destinationAfterClose = destination;
+      // El enlace conserva su navegación nativa; Bootstrap cierra el menú.
+      closeButton.click();
     });
   });
 
+  navigation.addEventListener("hidden.bs.drawer", () => {
+    syncExpandedState();
+    const destination = destinationAfterClose;
+    destinationAfterClose = null;
+    if (!destination) return;
+
+    // Bootstrap restaura primero el foco del botón de apertura. Después lo
+    // llevamos al apartado elegido, conservando el desplazamiento del enlace.
+    requestAnimationFrame(() => {
+      if (navigation.open || !destination.isConnected) return;
+      if (!destination.hasAttribute("tabindex"))
+        destination.setAttribute("tabindex", "-1");
+      destination.focus({ preventScroll: true });
+    });
+  });
+}
+
+function initializeProjects() {
   // 3. El HTML contiene los proyectos. Duplicar un article basta para añadir otro.
   const track = document.querySelector("#project-track");
   const controls = document.querySelector(".project-controls");
   const previousButton = document.querySelector("#project-prev");
   const nextButton = document.querySelector("#project-next");
   const position = document.querySelector("#project-position");
+  if (!track || !controls || !previousButton || !nextButton || !position)
+    return;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function cards() {
@@ -72,23 +127,35 @@ document.addEventListener("DOMContentLoaded", () => {
     previousButton.disabled = track.scrollLeft <= 2;
     nextButton.disabled = track.scrollLeft >= maxScroll - 2;
     // Se cuenta el tramo visible, también cuando caben varias tarjetas.
-    const visible = items.filter((card) =>
-      card.offsetLeft + card.offsetWidth > track.scrollLeft + 2 &&
-      card.offsetLeft < track.scrollLeft + track.clientWidth - 2
+    const visible = items.filter(
+      (card) =>
+        card.offsetLeft + card.offsetWidth > track.scrollLeft + 2 &&
+        card.offsetLeft < track.scrollLeft + track.clientWidth - 2,
     );
     const first = items.indexOf(visible[0]) + 1;
     const last = items.indexOf(visible[visible.length - 1]) + 1;
-    const label = first === last ? `${first} / ${items.length}` : `${first}–${last} / ${items.length}`;
+    const label =
+      first === last
+        ? `${first} / ${items.length}`
+        : `${first}–${last} / ${items.length}`;
     if (position.textContent !== label) position.textContent = label;
   }
 
   function scrollToCard(left) {
-    track.scrollTo({ left, behavior: reducedMotion.matches ? "instant" : "smooth" });
+    track.scrollTo({
+      left,
+      behavior: reducedMotion.matches ? "instant" : "smooth",
+    });
   }
 
   function moveCards(direction) {
     const items = cards();
-    const step = items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : track.clientWidth;
+    if (items.length === 0) return;
+    const step =
+      items.length > 1
+        ? items[1].offsetLeft - items[0].offsetLeft
+        : track.clientWidth;
+    if (step <= 0) return;
     const current = Math.round(track.scrollLeft / step);
     scrollToCard((current + direction) * step);
   }
@@ -97,14 +164,29 @@ document.addEventListener("DOMContentLoaded", () => {
   nextButton.addEventListener("click", () => moveCards(1));
   // El trackpad y el gesto táctil usan el desplazamiento nativo del navegador.
   // Con rueda vertical, Mayús + rueda permite recorrer el carrusel con ratón.
-  track.addEventListener("wheel", (event) => {
-    if (!event.shiftKey || !event.deltaY || Math.abs(event.deltaX) > 0) return;
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    const next = Math.max(0, Math.min(maxScroll, track.scrollLeft + event.deltaY));
-    if (next === track.scrollLeft) return;
-    event.preventDefault();
-    track.scrollLeft = next;
-  }, { passive: false });
+  track.addEventListener(
+    "wheel",
+    (event) => {
+      if (!event.shiftKey || !event.deltaY || Math.abs(event.deltaX) > 0)
+        return;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      // La rueda puede expresar su distancia en píxeles, líneas o páginas.
+      const unit =
+        event.deltaMode === 1
+          ? 16
+          : event.deltaMode === 2
+            ? track.clientWidth
+            : 1;
+      const next = Math.max(
+        0,
+        Math.min(maxScroll, track.scrollLeft + event.deltaY * unit),
+      );
+      if (next === track.scrollLeft) return;
+      event.preventDefault();
+      track.scrollLeft = next;
+    },
+    { passive: false },
+  );
 
   track.addEventListener("keydown", (event) => {
     if (event.target !== track) return;
@@ -120,11 +202,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Agrupar los anuncios evita que el lector de pantalla los repita al deslizar.
   let scrollTimer;
-  track.addEventListener("scroll", () => {
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(updateControls, 120);
-  }, { passive: true });
+  track.addEventListener(
+    "scroll",
+    () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(updateControls, 120);
+    },
+    { passive: true },
+  );
   new ResizeObserver(updateControls).observe(track);
   new MutationObserver(updateControls).observe(track, { childList: true });
   updateControls();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const year = document.querySelector("#year");
+  if (year) year.textContent = new Date().getFullYear();
+  initializeThemeButton();
+  initializeNavigation();
+  initializeProjects();
 });
