@@ -27,12 +27,14 @@
       integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
       crossorigin="anonymous"
     ></script>
-    <script src="assets/js/script.js" defer></script>
+    <!-- Aplicar el tema antes de pintar la página evita destellos. -->
+    <script src="assets/js/script.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Saltar al contenido</a>
 
-    <!-- Iconos propios reutilizados con <use>; no necesitan otra librería. -->
+    <!-- Iconos de interfaz propios y marcas de Bootstrap Icons (MIT):
+         https://github.com/twbs/icons/blob/main/LICENSE -->
     <svg
       class="icon-library"
       xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +54,25 @@
       <symbol id="icon-layers" viewBox="0 0 24 24">
         <path d="m12 3 10 5-10 5L2 8Zm-10 9 10 5 10-5M2 16l10 5 10-5" />
       </symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24">
+        <path d="M20.5 13A9 9 0 0 1 11 3.5 9 9 0 1 0 20.5 13Z" />
+      </symbol>
+      <symbol id="icon-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+        />
+      </symbol>
+      <symbol id="icon-linkedin" viewBox="0 0 16 16">
+        <path
+          d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+        />
+      </symbol>
+      <symbol id="icon-github" viewBox="0 0 16 16">
+        <path
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+        />
+      </symbol>
     </svg>
 
     <header class="site-header" id="home">
@@ -63,8 +84,23 @@
           class="navbar-brand signature"
           href="#home"
           aria-label="Marina, inicio"
-          >marina<span>.</span></a
+          >marina fernández<span>.</span></a
         >
+        <button
+          class="round-button theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Activar modo oscuro"
+          aria-pressed="false"
+          hidden
+        >
+          <svg class="icon theme-moon" aria-hidden="true">
+            <use href="#icon-moon" />
+          </svg>
+          <svg class="icon theme-sun" aria-hidden="true">
+            <use href="#icon-sun" />
+          </svg>
+        </button>
         <button
           class="navbar-toggler menu-toggle"
           type="button"
@@ -83,7 +119,7 @@
         >
           <div class="drawer-header">
             <p class="drawer-title signature" id="navigation-title">
-              marina<span>.</span>
+              marina fernández<span>.</span>
             </p>
             <button
               type="button"
@@ -107,12 +143,7 @@
                 <a class="nav-link" href="#projects">Proyectos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#contact">Contacto</a>
-              </li>
-              <li class="nav-item">
-                <a class="contact-link" href="#contact"
-                  >Hablemos <span aria-hidden="true">↗</span></a
-                >
+                <a class="contact-link" href="#contact">Contacto</a>
               </li>
             </ul>
           </div>
@@ -157,11 +188,6 @@
               />
               <span class="map-cross cross-one">+</span
               ><span class="map-cross cross-two">+</span>
-              <span class="map-caption"
-                >Mapas<br />Datos<br />Experiencias<span
-                  class="map-caption-line"
-                ></span
-              ></span>
             </div>
           </div>
           <div class="hero-footnote">
@@ -219,26 +245,13 @@
               >
                 <button
                   class="nav-link active"
-                  id="all-tab"
-                  type="button"
-                  role="tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#all-skills"
-                  aria-controls="all-skills"
-                  aria-selected="true"
-                >
-                  Todas
-                </button>
-                <button
-                  class="nav-link"
                   id="gis-tab"
                   type="button"
                   role="tab"
                   data-bs-toggle="tab"
                   data-bs-target="#gis-skills"
                   aria-controls="gis-skills"
-                  aria-selected="false"
-                  tabindex="-1"
+                  aria-selected="true"
                 >
                   <svg class="icon" aria-hidden="true">
                     <use href="#icon-globe" />
@@ -262,105 +275,145 @@
                   Developer
                 </button>
               </div>
-              <!-- Todas se escribe también en HTML para que el contenido no dependa de JS. -->
+              <!-- Cada tarjeta tiene data-level: practica, aprendiendo o pendiente.
+                   Las pendientes permanecen ocultas con hidden y no se presentan como conocimientos.
+                   Para publicar una: confirmar nivel, cambiar data-level y <small>, y retirar hidden.
+                   Se separan JavaScript/TypeScript y HTML-CSS/React-Next para no atribuir el mismo nivel. -->
               <div class="tab-content skills-content">
                 <div
                   class="tab-pane show active"
-                  id="all-skills"
-                  role="tabpanel"
-                  aria-labelledby="all-tab"
-                  tabindex="0"
-                >
-                  <ul class="skill-grid">
-                    <li>
-                      <svg class="icon" aria-hidden="true">
-                        <use href="#icon-globe" /></svg
-                      ><span
-                        >ArcGIS Online / Enterprise<small
-                          >Experiencia en prácticas</small
-                        ></span
-                      >
-                    </li>
-                    <li>
-                      <svg class="icon" aria-hidden="true">
-                        <use href="#icon-layers" /></svg
-                      ><span
-                        >Experience Builder<small
-                          >Experiencia en prácticas</small
-                        ></span
-                      >
-                    </li>
-                    <li>
-                      <svg class="icon" aria-hidden="true">
-                        <use href="#icon-code" /></svg
-                      ><span
-                        >ArcGIS Maps SDK · JS<small
-                          >Experiencia en prácticas</small
-                        ></span
-                      >
-                    </li>
-                    <li>
-                      <span class="skill-monogram" aria-hidden="true">Py</span
-                      ><span
-                        >Python<small>Experiencia en prácticas</small></span
-                      >
-                    </li>
-                    <li>
-                      <svg class="icon" aria-hidden="true">
-                        <use href="#icon-code" /></svg
-                      ><span>HTML y CSS<small>Formación en curso</small></span>
-                    </li>
-                    <li>
-                      <span class="skill-monogram" aria-hidden="true">B</span
-                      ><span>Bootstrap<small>Formación en curso</small></span>
-                    </li>
-                    <li>
-                      <span class="skill-monogram" aria-hidden="true">JS</span
-                      ><span
-                        >JavaScript<small>Aprendizaje progresivo</small></span
-                      >
-                    </li>
-                  </ul>
-                </div>
-                <div
-                  class="tab-pane"
                   id="gis-skills"
                   role="tabpanel"
                   aria-labelledby="gis-tab"
                   tabindex="0"
                 >
                   <ul class="skill-grid">
-                    <li>
+                    <li data-level="pendiente" hidden>
                       <svg class="icon" aria-hidden="true">
-                        <use href="#icon-globe" /></svg
-                      ><span
-                        >ArcGIS Online / Enterprise<small
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >ArcGIS Pro<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="practica">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >ArcGIS Online<small
                           >Experiencia en prácticas</small
                         ></span
                       >
                     </li>
-                    <li>
+                    <li data-level="practica">
                       <svg class="icon" aria-hidden="true">
-                        <use href="#icon-layers" /></svg
-                      ><span
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >ArcGIS Enterprise<small
+                          >Experiencia en prácticas</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="practica">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
                         >Experience Builder<small
                           >Experiencia en prácticas</small
                         ></span
                       >
                     </li>
-                    <li>
+                    <li data-level="pendiente" hidden>
                       <svg class="icon" aria-hidden="true">
-                        <use href="#icon-code" /></svg
-                      ><span
-                        >ArcGIS Maps SDK · JS<small
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >Dashboards<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >Field Maps y Survey123<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="practica">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >ArcGIS Maps SDK for JavaScript<small
                           >Experiencia en prácticas</small
                         ></span
                       >
                     </li>
-                    <li>
-                      <span class="skill-monogram" aria-hidden="true">Py</span
-                      ><span
-                        >Python<small>Experiencia en prácticas</small></span
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >Experience Builder Developer Edition<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >ArcGIS API for Python<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >ArcPy<small>Nivel pendiente de confirmar</small></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >QGIS y OpenStreetMap<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >Análisis de redes<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" />
+                      </svg>
+                      <span
+                        >Visualización 3D y gemelos digitales<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
                       >
                     </li>
                   </ul>
@@ -373,19 +426,98 @@
                   tabindex="0"
                 >
                   <ul class="skill-grid">
-                    <li>
+                    <li data-level="practica">
                       <svg class="icon" aria-hidden="true">
-                        <use href="#icon-code" /></svg
-                      ><span>HTML y CSS<small>Formación en curso</small></span>
+                        <use href="#icon-code" />
+                      </svg>
+                      <span>Python<small>Experiencia en prácticas</small></span>
                     </li>
-                    <li>
-                      <span class="skill-monogram" aria-hidden="true">B</span
-                      ><span>Bootstrap<small>Formación en curso</small></span>
+                    <li data-level="aprendiendo">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span>JavaScript<small>En aprendizaje</small></span>
                     </li>
-                    <li>
-                      <span class="skill-monogram" aria-hidden="true">JS</span
-                      ><span
-                        >JavaScript<small>Aprendizaje progresivo</small></span
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span
+                        >TypeScript<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="aprendiendo">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span>HTML y CSS<small>En aprendizaje</small></span>
+                    </li>
+                    <li data-level="aprendiendo">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span>Bootstrap<small>En aprendizaje</small></span>
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span
+                        >React y Next.js<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span
+                        >Node.js, Express.js y REST APIs<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span
+                        >PostgreSQL, MongoDB y PostGIS<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span
+                        >Git y GitHub<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span
+                        >Testing, CI/CD y Cloud<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
+                      >
+                    </li>
+                    <li data-level="pendiente" hidden>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" />
+                      </svg>
+                      <span
+                        >JWT y OAuth<small
+                          >Nivel pendiente de confirmar</small
+                        ></span
                       >
                     </li>
                   </ul>
@@ -421,7 +553,9 @@
             marcadores de contenido; las imágenes son recursos gráficos
             decorativos, no capturas de proyectos.
           </p>
-          <!-- Sustituir los marcadores solo al tener título, captura y permisos confirmados. -->
+          <!-- Para añadir un proyecto, duplicar un <article class="project-card"> completo.
+               Cambiar imagen (y sus dimensiones), categoría, título, descripción y ficha.
+               Añadir enlaces solo cuando estén confirmados. Los controles cuentan las tarjetas automáticamente. -->
           <div
             class="project-track"
             id="project-track"
@@ -559,30 +693,42 @@
               />
               Si tu equipo trabaja en estos ámbitos, me encantará conoceros.
             </p>
-            <!-- Reemplazar por enlaces reales después de confirmar los datos y su publicación. -->
-            <div class="contact-actions" aria-describedby="contact-pending">
-              <button class="button button-primary" type="button" disabled>
+            <div class="contact-actions">
+              <a
+                class="button button-primary"
+                href="mailto:marinafdez.martin@gmail.com"
+              >
                 Escríbeme
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-arrow" />
                 </svg>
-              </button>
-              <span class="pending-profile"
-                >LinkedIn <span aria-hidden="true">↗</span
-                ><small>Enlace pendiente</small></span
+              </a>
+              <a
+                class="social-link"
+                href="https://www.linkedin.com/in/marina-fernández-martín"
+                aria-label="Perfil de Marina Fernández Martín en LinkedIn"
               >
-              <span class="pending-profile"
-                >GitHub <span aria-hidden="true">↗</span
-                ><small>Enlace pendiente</small></span
+                <svg class="icon brand-icon" aria-hidden="true">
+                  <use href="#icon-linkedin" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+              <a
+                class="social-link"
+                href="https://github.com/marinafdezmartin"
+                aria-label="Perfil de Marina en GitHub"
               >
+                <svg class="icon brand-icon" aria-hidden="true">
+                  <use href="#icon-github" />
+                </svg>
+                <span>GitHub</span>
+              </a>
             </div>
-            <p class="contact-pending" id="contact-pending">
-              Correo y perfiles profesionales pendientes de confirmar.
-            </p>
+            <a class="contact-email" href="mailto:marinafdez.martin@gmail.com"
+              >marinafdez.martin@gmail.com</a
+            >
           </div>
-          <div class="contact-art" aria-hidden="true">
-            <span>Ideas<br />Personas<br />Territorios</span>
-          </div>
+          <div class="contact-art" aria-hidden="true"></div>
         </div>
       </section>
     </main>
@@ -594,7 +740,7 @@
             class="signature"
             href="#home"
             aria-label="Marina, volver al inicio"
-            >marina<span>.</span></a
+            >marina fernández<span>.</span></a
           >
           <p>© <span id="year">2026</span> Marina Fernández Martín</p>
         </div>
