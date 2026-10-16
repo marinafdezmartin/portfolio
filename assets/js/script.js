@@ -17,10 +17,23 @@ try {
 
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
+  updateThemeImages(theme);
   const button = document.querySelector("#theme-toggle");
   if (button) {
     button.setAttribute("aria-pressed", String(theme === "dark"));
   }
+}
+
+// Cada imagen tiene dos rutas, pero solo un <img>. Su src inicial transparente
+// evita descargar la variante clara si el tema guardado es oscuro.
+function updateThemeImages(theme) {
+  document
+    .querySelectorAll("img[data-src-light][data-src-dark]")
+    .forEach((image) => {
+      const source =
+        theme === "dark" ? image.dataset.srcDark : image.dataset.srcLight;
+      if (image.getAttribute("src") !== source) image.src = source;
+    });
 }
 
 applyTheme(chosenTheme || (systemTheme.matches ? "dark" : "light"));
@@ -216,6 +229,7 @@ function initializeProjects() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  updateThemeImages(document.documentElement.dataset.theme);
   const year = document.querySelector("#year");
   if (year) year.textContent = new Date().getFullYear();
   initializeThemeButton();

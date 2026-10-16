@@ -21,7 +21,10 @@
   --color-scrollbar: #c8d5e5;
   --page-gutter: max(3rem, calc((100vw - 1160px) / 2));
   --art-blend: multiply;
-  --art-opacity: 1;
+  --contact-art-image: url("../img/gallery/graphics/curvas-nivel-minimal.png");
+  --skill-card-padding: 0.5rem 0.6rem;
+  --skill-card-min-height: 54px;
+  --skill-icon-size: 1.1rem;
   color-scheme: light;
   --bs-body-font-family: "Segoe UI", Arial, sans-serif;
   --bs-body-color: var(--color-text);
@@ -48,8 +51,8 @@
   --color-map-line: #526985;
   --color-selection: #304b70;
   --color-scrollbar: #526985;
-  --art-blend: luminosity;
-  --art-opacity: 0.28;
+  --art-blend: normal;
+  --contact-art-image: url("../img/gallery/graphics/curvas-nivel-minimal-dark.png");
 }
 
 * {
@@ -359,19 +362,17 @@ h1 span {
   position: relative;
   min-height: 500px;
 }
-/* El original mide 551 × 309 px: se limita su tamaño, sin filtros ni ampliación.
-   El margen negativo acerca el gráfico al borde del viewport. Las máscaras
-   solo integran los bordes; no desenfocan la imagen. */
+/* Ambas variantes miden 1916 × 821 px. El gráfico aprovecha la columna y
+   el margen exterior sin superar su resolución ni deformar su proporción. */
 .hero-art img {
   position: absolute;
-  width: min(calc(100% + var(--page-gutter)), 551px);
+  width: min(calc(100% + var(--page-gutter)), 1916px);
   max-width: none;
   height: auto;
   top: 50%;
   right: calc(-1 * var(--page-gutter));
   transform: translateY(-50%);
   mix-blend-mode: var(--art-blend);
-  opacity: var(--art-opacity);
   mask-image:
     linear-gradient(to right, transparent, black 18%),
     radial-gradient(ellipse 100% 50% at 65% 50%, black 45%, transparent 100%);
@@ -481,11 +482,11 @@ h1 span {
   height: 1rem;
 }
 .skills-content {
-  min-height: 170px;
+  min-height: 0;
 }
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.6rem;
   list-style: none;
   padding: 0;
@@ -494,13 +495,13 @@ h1 span {
 .skill-grid li {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  min-height: 76px;
-  padding: 0.75rem;
+  gap: 0.5rem;
+  min-height: var(--skill-card-min-height);
+  padding: var(--skill-card-padding);
   border: 1px solid var(--color-border);
   border-radius: 0.55rem;
   background: var(--color-card);
-  font-size: 0.73rem;
+  font-size: 0.7rem;
   line-height: 1.45;
   overflow-wrap: anywhere;
   transition:
@@ -517,8 +518,17 @@ h1 span {
 }
 .skill-grid .icon {
   color: var(--color-primary);
-  width: 1.35rem;
-  height: 1.35rem;
+  width: var(--skill-icon-size);
+  height: var(--skill-icon-size);
+}
+.skill-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+.skill-grid li > span:last-child {
+  min-width: 0;
 }
 .skill-grid small {
   display: block;
@@ -734,17 +744,15 @@ h1 span {
   font-size: 0.75rem;
   overflow-wrap: anywhere;
 }
-/* Fondo de 545 × 307 px, dibujado una sola vez y sin estirarlo con cover. */
+/* El fondo cambia con el tema. Comparte el criterio de ancho del hero. */
 .contact-art {
   position: absolute;
-  width: min(49% + var(--page-gutter), 545px);
-  height: 100%;
-  top: 0;
+  width: min(52% + var(--page-gutter), 1916px);
+  height: calc(100% + 4rem);
+  top: -2rem;
   right: calc(-1 * var(--page-gutter));
-  background: url("../img/gallery/graphics/curvas-nivel-minimal.png") right
-    center / min(100%, 545px) auto no-repeat;
+  background: var(--contact-art-image) right center / 100% auto no-repeat;
   mix-blend-mode: var(--art-blend);
-  opacity: var(--art-opacity);
   mask-image:
     linear-gradient(to right, transparent, black 45%),
     radial-gradient(ellipse 100% 50% at 80% 50%, black 25%, transparent 100%);
@@ -873,8 +881,10 @@ h1 span {
     padding-left: 1.8rem;
   }
   .skill-grid li {
-    padding: 0.65rem;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
+  }
+  .skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .project-track {
     grid-auto-columns: calc((100% - 1.2rem) / 2);
@@ -947,8 +957,8 @@ h1 span {
     padding: 2.5rem 0.75rem 0;
     margin-top: 2.5rem;
   }
-  .skill-grid li {
-    font-size: 0.74rem;
+  .skill-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
   }
   .section-index {
     margin-bottom: 0.9rem;
