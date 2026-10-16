@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marina Fernández Martín · GIS y desarrollo web</title>
+    <meta
+      name="description"
+      content="Portfolio de Marina Fernández Martín. Ciencias Ambientales, experiencia práctica en GIS y WebGIS, y formación en desarrollo web Full-Stack."
+    />
+    <meta name="theme-color" content="#4169a1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%234169a1'/%3E%3Ctext x='7' y='29' font-family='Arial,sans-serif' font-size='29' fill='white'%3Em%3C/text%3E%3C/svg%3E"
+    />
+    <!-- Bootstrap 6 alpha: CSS y JS de la misma versión, según su guía oficial. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+      integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/js/script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <!-- Iconos propios reutilizados con <use>; no necesitan otra librería. -->
+    <svg
+      class="icon-library"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M4 12h15m-6-6 6 6-6 6" />
+      </symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <ellipse cx="12" cy="12" rx="4" ry="9" />
+        <path d="M3 12h18" />
+      </symbol>
+      <symbol id="icon-code" viewBox="0 0 24 24">
+        <path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-14-2 16" />
+      </symbol>
+      <symbol id="icon-layers" viewBox="0 0 24 24">
+        <path d="m12 3 10 5-10 5L2 8Zm-10 9 10 5 10-5M2 16l10 5 10-5" />
+      </symbol>
+    </svg>
+
+    <header class="site-header" id="home">
+      <nav
+        class="navbar md:navbar-expand container page-container"
+        aria-label="Navegación principal"
+      >
+        <a
+          class="navbar-brand signature"
+          href="#home"
+          aria-label="Marina, inicio"
+          >marina<span>.</span></a
+        >
+        <button
+          class="navbar-toggler menu-toggle"
+          type="button"
+          data-bs-toggle="drawer"
+          data-bs-target="#navigation"
+          aria-controls="navigation"
+          aria-expanded="false"
+          aria-label="Abrir navegación"
+        >
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
+        </button>
+        <dialog
+          class="drawer drawer-end"
+          id="navigation"
+          aria-labelledby="navigation-title"
+        >
+          <div class="drawer-header">
+            <p class="drawer-title signature" id="navigation-title">
+              marina<span>.</span>
+            </p>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="drawer"
+              aria-label="Cerrar navegación"
+            ></button>
+          </div>
+          <div class="drawer-body">
+            <ul class="nav navbar-nav site-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#home">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#profile">Sobre mí</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#skills">Skills</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#projects">Proyectos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="contact-link" href="#contact"
+                  >Hablemos <span aria-hidden="true">↗</span></a
+                >
+              </li>
+            </ul>
+          </div>
+        </dialog>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container page-container">
+          <div class="row hero-row">
+            <div class="col-12 md:col-6 hero-copy">
+              <p class="eyebrow">GIS / WebGIS · Desarrollo web</p>
+              <h1 id="hero-title">
+                Desarrollo web<br />con visión<br /><span>geoespacial.</span>
+              </h1>
+              <p class="hero-description">
+                Soy Marina. Conecto mapas, datos y código para dar forma a
+                experiencias digitales claras, con sensibilidad por el diseño.
+              </p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="#projects"
+                  >Ver proyectos
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-arrow" /></svg
+                ></a>
+                <a class="text-link" href="#profile"
+                  >Sobre mí
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-arrow" /></svg
+                ></a>
+              </div>
+            </div>
+            <div class="col-12 md:col-6 hero-art" aria-hidden="true">
+              <span class="map-coordinates">40.4168° N<br />3.7038° W</span>
+              <img
+                src="assets/img/gallery/graphics/malla-relieve-gris.webp"
+                alt=""
+                width="551"
+                height="309"
+                fetchpriority="high"
+              />
+              <span class="map-cross cross-one">+</span
+              ><span class="map-cross cross-two">+</span>
+              <span class="map-caption"
+                >Mapas<br />Datos<br />Experiencias<span
+                  class="map-caption-line"
+                ></span
+              ></span>
+            </div>
+          </div>
+          <div class="hero-footnote">
+            <span>Marina Fernández Martín · Madrid, España</span
+            ><a href="#profile"
+              >Explora mi perfil <span aria-hidden="true">↓</span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <div class="profile-skills section-band">
+        <div class="container page-container">
+          <div class="row profile-row">
+            <section
+              class="col-12 md:col-6 profile-copy"
+              id="profile"
+              aria-labelledby="profile-title"
+            >
+              <p class="section-index"><span>01</span></p>
+              <h2 id="profile-title">Sobre mí</h2>
+              <p class="intro">Del territorio a la pantalla.</p>
+              <p>
+                Soy Marina Fernández Martín, graduada en Ciencias Ambientales
+                por la UAM y formada en el MasterGIS de Esri España. Me interesa
+                cómo los mapas y los datos nos ayudan a comprender el entorno.
+              </p>
+              <p>
+                Durante mis prácticas técnicas en Esri España trabajé con
+                soluciones WebGIS. También he participado en la validación de
+                datos ambientales de la Red de Control y Vigilancia de la
+                Calidad del Aire de Canarias.
+              </p>
+              <p>
+                Ahora curso el bootcamp de Desarrollo Web Full-Stack de Neoland.
+                Sigo aprendiendo a unir código, pensamiento geoespacial y diseño
+                visual.
+              </p>
+              <span class="learning-note"
+                ><span aria-hidden="true"></span>En formación continua</span
+              >
+            </section>
+
+            <section
+              class="col-12 md:col-6 skills-copy"
+              id="skills"
+              aria-labelledby="skills-title"
+            >
+              <p class="section-index"><span>02</span></p>
+              <h2 id="skills-title">Skills</h2>
+              <div
+                class="nav nav-pills skill-tabs"
+                role="tablist"
+                aria-label="Categorías de habilidades"
+              >
+                <button
+                  class="nav-link active"
+                  id="all-tab"
+                  type="button"
+                  role="tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#all-skills"
+                  aria-controls="all-skills"
+                  aria-selected="true"
+                >
+                  Todas
+                </button>
+                <button
+                  class="nav-link"
+                  id="gis-tab"
+                  type="button"
+                  role="tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#gis-skills"
+                  aria-controls="gis-skills"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-globe" />
+                  </svg>
+                  GIS
+                </button>
+                <button
+                  class="nav-link"
+                  id="dev-tab"
+                  type="button"
+                  role="tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#dev-skills"
+                  aria-controls="dev-skills"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-code" />
+                  </svg>
+                  Developer
+                </button>
+              </div>
+              <!-- Todas se escribe también en HTML para que el contenido no dependa de JS. -->
+              <div class="tab-content skills-content">
+                <div
+                  class="tab-pane show active"
+                  id="all-skills"
+                  role="tabpanel"
+                  aria-labelledby="all-tab"
+                  tabindex="0"
+                >
+                  <ul class="skill-grid">
+                    <li>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" /></svg
+                      ><span
+                        >ArcGIS Online / Enterprise<small
+                          >Experiencia en prácticas</small
+                        ></span
+                      >
+                    </li>
+                    <li>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-layers" /></svg
+                      ><span
+                        >Experience Builder<small
+                          >Experiencia en prácticas</small
+                        ></span
+                      >
+                    </li>
+                    <li>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" /></svg
+                      ><span
+                        >ArcGIS Maps SDK · JS<small
+                          >Experiencia en prácticas</small
+                        ></span
+                      >
+                    </li>
+                    <li>
+                      <span class="skill-monogram" aria-hidden="true">Py</span
+                      ><span
+                        >Python<small>Experiencia en prácticas</small></span
+                      >
+                    </li>
+                    <li>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" /></svg
+                      ><span>HTML y CSS<small>Formación en curso</small></span>
+                    </li>
+                    <li>
+                      <span class="skill-monogram" aria-hidden="true">B</span
+                      ><span>Bootstrap<small>Formación en curso</small></span>
+                    </li>
+                    <li>
+                      <span class="skill-monogram" aria-hidden="true">JS</span
+                      ><span
+                        >JavaScript<small>Aprendizaje progresivo</small></span
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  class="tab-pane"
+                  id="gis-skills"
+                  role="tabpanel"
+                  aria-labelledby="gis-tab"
+                  tabindex="0"
+                >
+                  <ul class="skill-grid">
+                    <li>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-globe" /></svg
+                      ><span
+                        >ArcGIS Online / Enterprise<small
+                          >Experiencia en prácticas</small
+                        ></span
+                      >
+                    </li>
+                    <li>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-layers" /></svg
+                      ><span
+                        >Experience Builder<small
+                          >Experiencia en prácticas</small
+                        ></span
+                      >
+                    </li>
+                    <li>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" /></svg
+                      ><span
+                        >ArcGIS Maps SDK · JS<small
+                          >Experiencia en prácticas</small
+                        ></span
+                      >
+                    </li>
+                    <li>
+                      <span class="skill-monogram" aria-hidden="true">Py</span
+                      ><span
+                        >Python<small>Experiencia en prácticas</small></span
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  class="tab-pane"
+                  id="dev-skills"
+                  role="tabpanel"
+                  aria-labelledby="dev-tab"
+                  tabindex="0"
+                >
+                  <ul class="skill-grid">
+                    <li>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-code" /></svg
+                      ><span>HTML y CSS<small>Formación en curso</small></span>
+                    </li>
+                    <li>
+                      <span class="skill-monogram" aria-hidden="true">B</span
+                      ><span>Bootstrap<small>Formación en curso</small></span>
+                    </li>
+                    <li>
+                      <span class="skill-monogram" aria-hidden="true">JS</span
+                      ><span
+                        >JavaScript<small>Aprendizaje progresivo</small></span
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <p class="skills-note">
+                Herramientas utilizadas en prácticas y tecnologías que estoy
+                aprendiendo.
+              </p>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <section
+        class="projects section-band"
+        id="projects"
+        aria-labelledby="projects-title"
+      >
+        <div class="container page-container">
+          <div class="section-heading">
+            <div>
+              <p class="section-index"><span>03</span></p>
+              <h2 id="projects-title">Proyectos</h2>
+            </div>
+            <span class="section-aside"
+              >Una selección en preparación
+              <span aria-hidden="true">↗</span></span
+            >
+          </div>
+          <p class="projects-intro" id="projects-note">
+            Este espacio irá reuniendo mis trabajos. Por ahora, las tarjetas son
+            marcadores de contenido; las imágenes son recursos gráficos
+            decorativos, no capturas de proyectos.
+          </p>
+          <!-- Sustituir los marcadores solo al tener título, captura y permisos confirmados. -->
+          <div
+            class="project-track"
+            id="project-track"
+            tabindex="0"
+            role="region"
+            aria-roledescription="carrusel"
+            aria-label="Tarjetas de proyectos en preparación"
+            aria-describedby="projects-note project-help"
+          >
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="assets/img/gallery/graphics/curvas-nivel-azul.webp"
+                  width="545"
+                  height="309"
+                  alt=""
+                  loading="lazy"
+                /><span class="category"
+                  ><svg class="icon" aria-hidden="true">
+                    <use href="#icon-globe" />
+                  </svg>
+                  GIS</span
+                ><span class="image-note">Ilustración decorativa</span>
+              </div>
+              <div class="project-body">
+                <p class="project-state">Pendiente de contenido</p>
+                <h3>Espacio para un trabajo GIS</h3>
+                <p>
+                  Aquí se documentarán el contexto, las herramientas y mi
+                  participación en un trabajo verificado.
+                </p>
+                <span class="project-meta">Ficha y captura por confirmar</span>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="assets/img/gallery/graphics/malla-relieve-gris.webp"
+                  width="551"
+                  height="309"
+                  alt=""
+                  loading="lazy"
+                /><span class="category"
+                  ><svg class="icon" aria-hidden="true">
+                    <use href="#icon-code" />
+                  </svg>
+                  Web</span
+                ><span class="image-note">Ilustración decorativa</span>
+              </div>
+              <div class="project-body">
+                <p class="project-state">Pendiente de contenido</p>
+                <h3>Espacio para un trabajo web</h3>
+                <p>
+                  Un lugar para presentar un ejercicio o desarrollo, su proceso
+                  y los aprendizajes que me llevo.
+                </p>
+                <span class="project-meta"
+                  >Descripción y enlace por confirmar</span
+                >
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="assets/img/gallery/graphics/curvas-nivel-minimal.webp"
+                  width="545"
+                  height="307"
+                  alt=""
+                  loading="lazy"
+                /><span class="category"
+                  ><svg class="icon" aria-hidden="true">
+                    <use href="#icon-layers" />
+                  </svg>
+                  Visual</span
+                ><span class="image-note">Ilustración decorativa</span>
+              </div>
+              <div class="project-body">
+                <p class="project-state">Pendiente de contenido</p>
+                <h3>Espacio para un trabajo visual</h3>
+                <p>
+                  Una ficha reservada para una pieza que pueda compartir, con su
+                  objetivo y proceso de creación.
+                </p>
+                <span class="project-meta">Pieza y autoría por confirmar</span>
+              </div>
+            </article>
+          </div>
+          <div class="project-navigation">
+            <p id="project-help">
+              Desliza para explorar o usa las flechas con el carrusel enfocado.
+            </p>
+            <div class="project-controls" hidden>
+              <button
+                class="round-button"
+                id="project-prev"
+                type="button"
+                aria-label="Ver tarjeta anterior"
+                aria-controls="project-track"
+              >
+                <span aria-hidden="true">←</span>
+              </button>
+              <span
+                class="project-position"
+                id="project-position"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              ></span>
+              <button
+                class="round-button"
+                id="project-next"
+                type="button"
+                aria-label="Ver tarjeta siguiente"
+                aria-controls="project-track"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="contact section-band"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
+        <div class="container page-container contact-layout">
+          <div class="contact-copy">
+            <p class="section-index"><span>04</span></p>
+            <h2 id="contact-title">¿Conectamos?</h2>
+            <p>
+              Me interesa seguir creciendo en GIS, WebGIS y desarrollo web.<br
+                class="desktop-break"
+              />
+              Si tu equipo trabaja en estos ámbitos, me encantará conoceros.
+            </p>
+            <!-- Reemplazar por enlaces reales después de confirmar los datos y su publicación. -->
+            <div class="contact-actions" aria-describedby="contact-pending">
+              <button class="button button-primary" type="button" disabled>
+                Escríbeme
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-arrow" />
+                </svg>
+              </button>
+              <span class="pending-profile"
+                >LinkedIn <span aria-hidden="true">↗</span
+                ><small>Enlace pendiente</small></span
+              >
+              <span class="pending-profile"
+                >GitHub <span aria-hidden="true">↗</span
+                ><small>Enlace pendiente</small></span
+              >
+            </div>
+            <p class="contact-pending" id="contact-pending">
+              Correo y perfiles profesionales pendientes de confirmar.
+            </p>
+          </div>
+          <div class="contact-art" aria-hidden="true">
+            <span>Ideas<br />Personas<br />Territorios</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container page-container footer-layout">
+        <div>
+          <a
+            class="signature"
+            href="#home"
+            aria-label="Marina, volver al inicio"
+            >marina<span>.</span></a
+          >
+          <p>© <span id="year">2026</span> Marina Fernández Martín</p>
+        </div>
+        <nav aria-label="Navegación del pie">
+          <a href="#profile">Sobre mí</a><a href="#projects">Proyectos</a
+          ><a href="#contact">Contacto</a>
+        </nav>
+        <a
+          class="round-button back-to-top"
+          href="#home"
+          aria-label="Volver al inicio"
+          >↑</a
+        >
+      </div>
+    </footer>
+  </body>
+</html>
