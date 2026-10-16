@@ -741,7 +741,7 @@ h1 span {
   height: 100%;
   top: 0;
   right: calc(-1 * var(--page-gutter));
-  background: url("../img/gallery/graphics/curvas-nivel-minimal.webp") right
+  background: url("../img/gallery/graphics/curvas-nivel-minimal.png") right
     center / min(100%, 545px) auto no-repeat;
   mix-blend-mode: var(--art-blend);
   opacity: var(--art-opacity);
