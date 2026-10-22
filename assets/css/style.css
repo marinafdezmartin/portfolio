@@ -593,6 +593,16 @@ h1 span {
   scroll-snap-align: start;
   background: var(--color-card);
 }
+.project-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+.project-card-link:focus-visible {
+  outline-offset: -3px;
+}
+.project-card-link .project-meta {
+  text-decoration: underline;
+}
 .project-image {
   position: relative;
   overflow: hidden;
